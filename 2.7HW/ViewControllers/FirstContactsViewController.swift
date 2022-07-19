@@ -9,8 +9,8 @@ import UIKit
 
 class FirstContactsViewController: UITableViewController {
 
-    private var contactList = Person.getPersons()
-    
+    var contactList: [Person]!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.leftBarButtonItem = editButtonItem
@@ -25,8 +25,7 @@ class FirstContactsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "contactsID", for: indexPath)
         var content = cell.defaultContentConfiguration()
-        // indexPath.row возвращает индекс ячейки
-        // Экземпляр модели contactList
+        
         let contact = contactList[indexPath.row]
         
         content.text = contact.fullName        
@@ -48,13 +47,6 @@ class FirstContactsViewController: UITableViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let tabBarController = segue.destination as? UITabBarController else { return }
-        guard let viewControllers = tabBarController.viewControllers else { return }
-        for viewController in viewControllers {
-            if let secondContactsVC = viewController as? SecondContactsViewController {
-            secondContactsVC.contactList = contactList
-            }
-        }
         guard let contactDetailsVC = segue.destination as? ContactDetailsViewController else { return }
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
         let contact = contactList[indexPath.row]

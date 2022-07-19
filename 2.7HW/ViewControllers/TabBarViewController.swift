@@ -11,19 +11,17 @@ class TabBarViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupViewControllers()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    private func setupViewControllers() {
+        let contactList = Person.getPersons()
+        if let firstNavigationVC = viewControllers?.first as? UINavigationController {
+            let firstVC = firstNavigationVC.topViewController as! FirstContactsViewController
+            firstVC.contactList = contactList
+        } else if let secondNavigationVC = viewControllers?.last as? UINavigationController {
+            let secondVC = secondNavigationVC.topViewController as! SecondContactsViewController
+            secondVC.contactList = contactList
+        }
     }
-    */
-
 }

@@ -9,15 +9,10 @@ import UIKit
 
 class SecondContactsViewController: UITableViewController {
 
-//    private var contactList = Person.getPersons()
     var contactList: [Person]!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
 
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         contactList.count
     }
@@ -47,5 +42,8 @@ class SecondContactsViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
+    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
