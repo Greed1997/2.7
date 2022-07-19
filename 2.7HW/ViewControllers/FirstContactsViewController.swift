@@ -48,10 +48,16 @@ class FirstContactsViewController: UITableViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let tabBarController = segue.destination as? UITabBarController else { return }
+        guard let viewControllers = tabBarController.viewControllers else { return }
+        for viewController in viewControllers {
+            if let secondContactsVC = viewController as? SecondContactsViewController {
+            secondContactsVC.contactList = contactList
+            }
+        }
         guard let contactDetailsVC = segue.destination as? ContactDetailsViewController else { return }
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
         let contact = contactList[indexPath.row]
         contactDetailsVC.contactDetails = contact
     }
-
 }

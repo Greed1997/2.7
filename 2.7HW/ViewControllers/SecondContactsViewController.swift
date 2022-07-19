@@ -9,8 +9,8 @@ import UIKit
 
 class SecondContactsViewController: UITableViewController {
 
-    private var contactList = Person.getPersons()
-    
+//    private var contactList = Person.getPersons()
+    var contactList: [Person]!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,25 +26,26 @@ class SecondContactsViewController: UITableViewController {
     }
 
 
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "contactsFillID", for: indexPath)
-//
-//        return cell
-//    }
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "contactsFillID", for: indexPath)
+        var content = cell.defaultContentConfiguration()
+        
+        let contact = contactList[indexPath.row]
+        
+        if indexPath.row == 0 {
+          content.text = "Phone: \(contact.phone)"
+        } else {
+            content.text = "Email: \(contact.email)"
+        }
+        cell.contentConfiguration = content
+        return cell
+    }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         contactList[section].fullName
         
     }
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 100
+        return 50
     }
-
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-    }
-
 }
