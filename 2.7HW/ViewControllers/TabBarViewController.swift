@@ -9,11 +9,13 @@ import UIKit
 
 class TabBarViewController: UITabBarController {
 
-    var contactList = Person.getPersons()
+    let contactList = Person.getPersons()
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let tabBarController = segue.destination as? UITabBarController else { return }
-        guard let viewControllers = tabBarController.viewControllers else { return }
+    override func viewDidLoad() {
+        set()
+    }
+    private func set() {
+        guard let viewControllers = viewControllers else { return }
         for viewController in viewControllers {
             if let navigationVC = viewController as? UINavigationController {
                 if let firstContactVC = navigationVC.topViewController as? FirstContactsViewController {
