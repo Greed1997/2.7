@@ -25,7 +25,7 @@ class SecondContactsViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "contactsFillID", for: indexPath)
         var content = cell.defaultContentConfiguration()
         
-        let contact = contactList[indexPath.row]
+        let contact = contactList[indexPath.section]
         
         if indexPath.row == 0 {
           content.text = "Phone: \(contact.phone)"
